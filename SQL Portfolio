@@ -6,7 +6,7 @@ order by 3,4
 
 -- Select Data that we will be using
 
-Select Location, date, total_cases, new_cases, total_deaths, population
+Select location, date, total_cases, new_cases, total_deaths, population
 From `fabled-coder-324404.Portfolio.covid_deaths`
 Where continent is not null 
 order by 1,2
@@ -15,7 +15,7 @@ order by 1,2
 -- Total Cases vs Total Deaths
 -- Shows likelihood of dying if infected with Covid-19 in Dominican Republic
 
-Select Location, date, total_cases,total_deaths, (total_deaths/total_cases)*100 as DeathPercentage
+Select location, date, total_cases,total_deaths, (total_deaths/total_cases)*100 as death_percentage
 From `fabled-coder-324404.Portfolio.covid_deaths`
 Where location = 'Dominican Republic'
 and continent is not null 
@@ -25,25 +25,25 @@ order by 1,2
 -- Total Cases vs Population
 -- Percentage of population infected with Covid
 
-Select Location, date, Population, total_cases,  (total_cases/population)*100 as percent_population_infected
+Select location, date, population, total_cases,  (total_cases/population)*100 as percent_population_infected
 From `fabled-coder-324404.Portfolio.covid_deaths`
 order by 1,2
 
 
 -- Countries with Highest Infection Rate Per Capita
 
-Select Location, Population, MAX(total_cases) as highest_infection_count,  Max((total_cases/population))*100 as percent_population_infected
+Select location, population, MAX(total_cases) as highest_infection_count,  Max((total_cases/population))*100 as percent_population_infected
 From `fabled-coder-324404.Portfolio.covid_deaths`
-Group by Location, Population
+Group by location, population
 order by PercentPopulationInfected desc
 
 
 -- Countries with Highest Death Count
 
-Select Location, MAX(Total_deaths) as Total_Death_Count
+Select location, MAX(Total_deaths) as Total_Death_Count
 From `fabled-coder-324404.Portfolio.covid_deaths`
 Where continent is not null 
-Group by Location
+Group by location
 order by Total_Death_Count desc
 
 
